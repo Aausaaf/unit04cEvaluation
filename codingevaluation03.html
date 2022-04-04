@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width: 90vw;
+            min-height: 30vh;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-gap: 3vw;
+            margin-left: 5vh;
+            margin-top: 8vh;
+        }
+        h1{
+            width: 97vw;
+            height: 10vh;
+            text-align: center;
+            color: blueviolet;
+           
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+            font-size: 4vw;
+        }
+        .mont{
+            font-size: 1.4vw;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 550;
+            text-align: center;
+            margin: 0;
+            margin-left: -24.7vw;
+            margin-top: 10vh;
+
+        }
+        .inc{
+            font-size: 1.4vw;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 550;
+            text-align: center;
+            margin: 0;
+            margin-left: -28.4vw;
+            margin-top: 2vh;
+
+        }
+        .exp{
+            font-size: 1.4vw;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 550;
+            text-align: center;
+            margin: 0;
+            margin-left: -27.5vw;
+            margin-top: 2vh;
+
+        }
+        #month{
+            width: 22vw;
+            height: 4vh;
+            align-items: center;
+            margin-left: 32vw;
+
+        }
+        #income,#expense{
+            width: 21vw;
+            height: 3vh;
+            align-items: center;
+            margin-left: 32vw;
+
+        }
+        #button{
+            width: 21.5vw;
+            height: 6vh;
+            background-color: blueviolet;
+            font-size: 1.4vw;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: white;
+            margin-left: 32vw;
+            margin-top: 4.5vh;
+            border: 0.1vh solid blueviolet;
+            border-radius: 1.8vw;
+        }
+        #button:hover{
+            background-color: green;
+        }
+        .list{
+            background-color: black;
+            color: white;
+            padding: 1vw;
+            border: 0.1vh solid black;
+            border-radius: 1vw;
+        }
+        .mon{
+            color: blueviolet;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 2.5vw;
+        }
+        .ince{
+            color: red;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 1.5vw;
+        }
+        .save{
+            color: green;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 1.5vw;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>EXPENSE TRACKER</h1>
+    <form>
+        <p class="mont">Select Month</p>
+        <select  id="month">
+            <option value="January">January</option>
+            <option value="Feburary">Feburary</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="Auguest">Auguest</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+           
+        
+        <p  class="inc">Income</p>
+        <input type="number" id="income"/>
+        <p class="exp">Expense</p>
+        <input type="number"  id="expense"> 
+        <br>
+        <button id="button" type="submit" onclick="data()">Submit</button>
+    </form>
+    <div id="container"></div>
+    <script>
+        var month = document.getElementById("month")
+        var income = document.getElementById("income")
+        var expense = document.getElementById("expense")
+        var containers =  document.getElementById("container")
+        if(localStorage.getItem("expense")==undefined)
+        {
+            localStorage.setItem("expense",JSON.stringify([]))
+        }
+         var arr = []
+        var temp = JSON.parse(localStorage.getItem("expense"))
+       temp.forEach(d =>{
+           arr.push(d)
+       })
+      function data()
+      {
+          event.preventDefault();
+         // console.log(month.value);
+        //  console.log(income.value)
+        //  console.log(expense.value)
+        var a  = []
+        a.push(month.value)
+        a.push(income.value)
+        a.push(expense.value)
+        arr.push(a)
+       localStorage.setItem("expense",JSON.stringify(arr))
+       month.value = ""
+     
+       income.value = ""
+       expense.value = ""
+        a=[]
+        var val = JSON.parse(localStorage.getItem("expense"))
+        print(val)
+        
+      }
+      var datas = JSON.parse(localStorage.getItem("expense"))
+      print(datas)
+       function print(dat)
+       {
+           containers.innerHTML = ""
+        dat.forEach(data=> {
+           console.log(data[1])
+           var list = document.createElement('div')
+           list.setAttribute("class","list")
+           var mon = document.createElement('h2')
+           mon.setAttribute("class","mon")
+           mon.innerHTML = data[0]
+           var inc = document.createElement('p')
+           inc.innerHTML = "your income is Rs " + data[1] +"/-"
+           var exp = document.createElement('p')
+           exp.setAttribute("class","ince")
+           exp.innerHTML = "your expense is Rs " + data[2] +"/-"
+           var saving  = document.createElement('p')
+           saving.setAttribute("class","save")
+           saving.innerHTML = "your Saving are Rs " +  ( parseInt(data[1]) - parseInt(data[2])) +"/-"
+           list.append(mon,inc,exp,saving)
+           containers.append(list)
+
+       });
+       }
+    </script>
+</body>
+</html>
